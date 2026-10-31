@@ -1,0 +1,6 @@
+{
+  "name": "KADR",
+  "description": "KADR — сохрани ролик YouTube, Instagram, X, TikTok, Threads или RuTube: видео, фото и звук без водяных знаков.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

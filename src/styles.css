@@ -1,0 +1,162 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+@import "tw-animate-css";
+
+@theme {
+  --color-background: #09090b;
+  --color-foreground: #f4f4f2;
+  --color-surface: #121214;
+  --color-surface-2: #1a1a1e;
+  --color-surface-3: #232328;
+  --color-muted: #6e6e76;
+  --color-muted-foreground: #9a9aa3;
+  --color-primary: #c8ccd4;
+  --color-primary-foreground: #09090b;
+  --color-secondary: #1a1a1e;
+  --color-secondary-foreground: #f4f4f2;
+  --color-border: color-mix(in oklab, #f4f4f2 12%, transparent);
+  --color-ring: #c8ccd4;
+  --color-card: #121214;
+  --color-card-foreground: #f4f4f2;
+  --color-destructive: #c45c4a;
+
+  --font-sans: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Syne", "Manrope", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 28px;
+
+  --shadow-border: 0 0 0 1px color-mix(in oklab, #f4f4f2 8%, transparent);
+  --shadow-border-hover: 0 0 0 1px color-mix(in oklab, #f4f4f2 14%, transparent);
+
+  --tracking-display: -0.04em;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --motion-stagger: 40ms;
+  --motion-micro: 80ms;
+  --motion-quick: 150ms;
+  --motion-fast: 250ms;
+  --motion-slow: 400ms;
+  --motion-emphasis: 500ms;
+}
+
+html:not(.dark) {
+  --color-background: #f7f7f4;
+  --color-foreground: #121215;
+  --color-surface: #ffffff;
+  --color-surface-2: #efefe9;
+  --color-surface-3: #e3e3dc;
+  --color-muted: #71717a;
+  --color-muted-foreground: #52525b;
+  --color-primary: #18181b;
+  --color-primary-foreground: #f7f7f4;
+  --color-secondary: #efefe9;
+  --color-secondary-foreground: #121215;
+  --color-border: color-mix(in oklab, #121215 12%, transparent);
+  --color-ring: #18181b;
+  --color-card: #ffffff;
+  --color-card-foreground: #121215;
+  --color-destructive: #b93829;
+  --shadow-border: 0 1px 2px 0 rgba(18, 18, 21, 0.04), 0 0 0 1px color-mix(in oklab, #121215 8%, transparent);
+  --shadow-border-hover: 0 2px 6px 0 rgba(18, 18, 21, 0.07), 0 0 0 1px color-mix(in oklab, #121215 16%, transparent);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--color-background);
+    color: var(--color-foreground);
+    transition: background-color var(--motion-quick) var(--ease-out),
+      color var(--motion-quick) var(--ease-out);
+  }
+
+  body {
+    min-height: 100dvh;
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    transition: background-color var(--motion-quick) var(--ease-out),
+      color var(--motion-quick) var(--ease-out);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    font-family: var(--font-display);
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+}
+
+.hero-wash {
+  background: radial-gradient(
+    ellipse at top,
+    color-mix(in oklab, var(--color-foreground) 6%, transparent),
+    transparent 70%
+  );
+}
+
+.hero-stagger > * {
+  animation: kadr-rise var(--motion-emphasis) var(--ease-smooth-out) both;
+}
+
+.hero-stagger > *:nth-child(1) {
+  animation-delay: 0ms;
+}
+.hero-stagger > *:nth-child(2) {
+  animation-delay: 80ms;
+}
+.hero-stagger > *:nth-child(3) {
+  animation-delay: 140ms;
+}
+.hero-stagger > *:nth-child(4) {
+  animation-delay: 200ms;
+}
+
+@keyframes kadr-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.sprocket {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0 10px,
+    color-mix(in oklab, var(--color-foreground) 18%, transparent) 10px 14px
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-stagger > * {
+    animation: none;
+  }
+}
